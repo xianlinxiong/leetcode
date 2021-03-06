@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class Solution {
     public static void main(String[] args) {
 //        int[] nums = {8,2,4,4,4,9,5,2,5,8,8,0,8,6,9,1,1,6,3,5,1,2,6,6,0,4,8,6,0,3,2,8,7,6,5,1,7,0,3,4,8,3,5,9,0,4,0,1,0,5,9,2,0,7,0,2,1,0,8,2,5,1,2,3,9,7,4,7,0,0,1,8,5,6,7,5,1,9,9,3,5,0,7,5};
-        int[] nums = {1, 1, 2,2};
+        int[] nums = {2, 2, 1,1};
         System.out.println(permuteUnique(nums));
     }
 
@@ -44,7 +44,10 @@ public class Solution {
      */
     private static void doPermute(int[] nums, int start, List<List<Integer>> result) {
         if (start == nums.length) {
-            result.add(Arrays.stream(nums).boxed().collect(Collectors.toList()));
+            List<Integer>  list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+            if(!result.contains(list)) {
+                result.add(list);
+            }
         } else {
             for (int i = start; i < nums.length; i++) {
                 if(i != start && nums[i] == nums[start]){

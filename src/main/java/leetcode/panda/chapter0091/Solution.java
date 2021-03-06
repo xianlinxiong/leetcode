@@ -22,63 +22,47 @@ class Solution {
     public static void main(String[] args) {
 
         Solution s = new Solution();
-        System.out.println(s.numDecodings("01"));
+        System.out.println(s.numDecodings("123123"));
     }
 
     public int numDecodings(String s) {
         if (null == s || s.length() == 0) {
             return 0;
         }
-        int last = 0;
-        int second = 0;
-        int cur = s.length() - 1;
-        if (s.charAt(cur) != '0') {
-            second = 1;
+        int cur = 0;
+        for (; cur < s.length(); cur++) {
+            if (s.charAt(cur) != '0') {
+                break;
+            }
         }
-        cur--;
-        while (cur >= 0) {
-            int tmp = 0;
-
-            int x = Integer.parseInt(s.substring(cur, cur + 2));
-            if (s.charAt(cur) == '0') {
-                if (x == 0) {
+        if (0 != cur) {
+            return 0;
+        }
+        int l = 1;
+        int r = 1;
+        cur++;
+        for (; cur < s.length(); cur++) {
+            int k = s.charAt(cur) - '0';
+            int m = s.charAt(cur - 1) - '0';
+            if (k > 0) {
+                if (m * 10 + k <= 26 && m * 10 + k >10) {
+                    int t = r;
+                    r += l;
+                    l = t;
+                } else if(m*10+k <10) {
+                    r=l;
+                }else{
+                    l=r;
+                }
+            }else{
+                r=l;
+                if(m!=1 && m !=2){
                     return 0;
                 }
-                tmp = last;
-            } else {
-                tmp += second;
-                if (x < 27 && x >= 10) {
-                    tmp += last == 0 ? 1 : last;
-                }
             }
+        }
 
-            last = second;
-            second = tmp;
-            cur--;
-        }
-        return second;
-    }
-
-    public int numDecodings2(String s) {
-        if (null == s || s.length() == 0) {
-            return 0;
-        }
-        return doDecoding(s, 0);
-    }
-
-    private int doDecoding(String s, int start) {
-        if (start == s.length()) {
-            return 1;
-        }
-        if (start == s.length() + 1 || s.charAt(start) == '0') {
-            return 0;
-        }
-        int r = doDecoding(s, start + 1);
-        if (start + 1 < s.length() && Integer.parseInt(s.substring(start, start + 2)) < 27) {
-            r += doDecoding(s, start + 2);
-        }
         return r;
-
     }
 
 }

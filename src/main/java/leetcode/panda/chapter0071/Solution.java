@@ -50,7 +50,7 @@ class Solution {
     public static void main(String[] args) {
 
         Solution s = new Solution();
-        System.out.println(s.simplifyPath("/a/./b/../../c/"));
+        System.out.println(s.simplifyPath2("/../"));
     }
 
     /**
@@ -105,7 +105,9 @@ class Solution {
                 continue;
             }
             if(s.equals("..")){
-                stack.pop();
+                if(!stack.isEmpty()) {
+                    stack.pop();
+                }
             }
             else{
                 stack.push(s);

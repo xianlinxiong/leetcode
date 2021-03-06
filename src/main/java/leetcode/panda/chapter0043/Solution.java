@@ -24,8 +24,8 @@ import java.util.Arrays;
  */
 public class Solution {
     public static void main(String[] args) {
-        String num1 = "0";
-        String num2 = "0";
+        String num1 = "2";
+        String num2 = "3";
         System.out.println(multiply(num1, num2));
     }
 
@@ -47,7 +47,7 @@ public class Solution {
             int k =0;
             for(; k <= length1-1; k++){
                 int ki = num2.charAt(i)-'0';
-                int kj = num1.charAt(length1-k)-'0';
+                int kj = num1.charAt(length1-1-k)-'0';
                 int temp = start+k;
                 int num = ki*kj + result[temp] + next;
                 result[temp] = num % 10;

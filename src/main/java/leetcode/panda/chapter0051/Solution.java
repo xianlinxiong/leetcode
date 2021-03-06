@@ -48,11 +48,10 @@ class Solution {
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> result = new ArrayList<>();
         char[][] queen = new char[n][n];
-        for (int i = 0; i < n; i++) {
-            initQueen(queen, n);
-            queen[0][i] = 'Q';
-            getQueen(queen, 1,result);
-        }
+
+        initQueen(queen, n);
+
+        getQueen(queen, 0,result);
         return result;
     }
 
